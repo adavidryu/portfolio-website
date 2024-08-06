@@ -52,7 +52,7 @@ const EmailSection = () => {
         </h5>
         <p className="text-[#ADB7BE] mb-4 max-w-md">
           {" "}
-          I'm currently looking for new opportunities. I love to simply connect so please contact me and I'll get back to you!
+          I&apos;m currently looking for new opportunities. I love to simply connect so please contact me and I&apos;ll get back to you!
         </p>
         <div className="socials flex flex-row gap-2">
           <Link href="https://github.com/adavidryu">
