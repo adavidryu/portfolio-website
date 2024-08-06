@@ -17,11 +17,15 @@ const HeroSection = () => {
       sequence={[
         'Adam',
         1000,
-        'an aspiring software engineer',
+        'an aspiring SWE',
+        1000,
+        'a team player',
         1000,
         'a car enthusiast',
         1000,
-        'a team player',
+        'a volleyballer',
+        1000,
+        'much more than text',
         1000
       ]}
       wrapper="span"
