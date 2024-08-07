@@ -9,7 +9,7 @@ const TAB_DATA = [
         id: "skills",
         content: (
             <ul className="list-disc pl-2">
-                <li>JavaScript.js</li>
+                <li>JavaScript</li>
                 <li>HTML</li>
                 <li>CSS</li>
                 <li>Python</li>
@@ -57,7 +57,7 @@ const handleTabChange = (id) => {
             <div className="mt-4 md:mt-0 text-left flex flex-col h-full">
                 <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
                 <p className="text-base md:text-lg">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eum culpa quas repellendus expedita sunt optio consectetur quibusdam sed dolore dolor. Quae necessitatibus iusto harum earum natus corrupti minima delectus beatae.
+                    I'm currently learning to be well versed in full-stack development. Constantly learning and building.<br></br><br></br>Something that piques my interest is augmented reality and it's potential to integrate into society.<br></br><br></br>Fun fact: I am South Korean and I've been to over 15 countries. I love experiencing others' cultures and sharing my own.
                 </p>
                 <div className="flex flex-row justify-start mt-8">
                     <TabButton selectTab={() => handleTabChange("skills")} active={tab=== "skills"}>
