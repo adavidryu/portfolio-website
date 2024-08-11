@@ -57,7 +57,7 @@ const handleTabChange = (id) => {
             <div className="mt-4 md:mt-0 text-left flex flex-col h-full">
                 <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
                 <p className="text-base md:text-lg">
-                    I&apos;m currently learning to be well versed in full-stack development. Constantly learning and building.<br></br><br></br>Something that piques my interest is augmented reality and it's potential to integrate into society.<br></br><br></br>Fun fact: I am South Korean and I've been to over 15 countries. I love experiencing others' cultures and sharing my own.
+                    I&apos;m currently learning to be well versed in full-stack development. Constantly learning and building.<br></br><br></br>Something that piques my interest is augmented reality and it&apos;s potential to integrate into society.<br></br><br></br>Fun fact: I am South Korean and I&apos;ve been to over 15 countries. I love experiencing others&apos; cultures and sharing my own.
                 </p>
                 <div className="flex flex-row justify-start mt-8">
                     <TabButton selectTab={() => handleTabChange("skills")} active={tab=== "skills"}>
