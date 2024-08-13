@@ -1,7 +1,9 @@
+'use client'
 import Link from 'next/link'
 import React from 'react'
 import NavLink from './NavLink'
 import Image from 'next/image'
+import { useState } from 'react';
 
 const navLinks = [
     {
@@ -20,23 +22,24 @@ const navLinks = [
 ]
 
 const Navbar = () => {
-    return (
-      <nav className="fixed top-0 left-0 right-0 z-10 bg-[#121212] bg-opacity-90">
-        <div className="flex flex-wrap items-center justify-between mx-auto px-8 py-2">
-          <Link href="/" legacyBehavior>
-            <a className="flex items-center">
-              <div className="relative w-14 h-14 md:w-20 md:h-20">
-                <Image
-                  src="/images/logo.png"
-                  alt="Logo"
-                  fill
-                  object-contain
-                />
-              </div>
-            </a>
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  return (
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#121212] bg-opacity-85 backdrop-blur-sm">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 sm:h-20">
+          <Link href="/" className="flex items-center">
+            <div className="relative w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16">
+              <Image
+                src="/images/logo.png"
+                alt="Logo"
+                fill
+                className="object-contain"
+              />
+            </div>
           </Link>
-          <div className="menu block md:w-auto" id="navbar">
-            <ul className="flex p-4 md:p-0 md:flex-row md:space-x-8 mt-0">
+          <div className="hidden sm:block">
+            <ul className="flex space-x-4 sm:space-x-6 lg:space-x-8">
               {navLinks.map((link, index) => (
                 <li key={index}>
                   <NavLink href={link.path} title={link.title} />
@@ -44,9 +47,49 @@ const Navbar = () => {
               ))}
             </ul>
           </div>
+          <div className="sm:hidden">
+            {/* Hamburger menu button */}
+            <button 
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="text-gray-300 hover:bg-gray-700 hover:text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+            >
+              <span className="sr-only">Open main menu</span>
+              <svg 
+                className="h-6 w-6" 
+                xmlns="http://www.w3.org/2000/svg" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke="currentColor" 
+                aria-hidden="true"
+              >
+                <path 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  strokeWidth="2" 
+                  d="M4 6h16M4 12h16M4 18h16" 
+                />
+              </svg>
+            </button>
+          </div>
         </div>
-      </nav>
-    );
-  };
-  
-  export default Navbar;
+      </div>
+      {/* Mobile menu, show/hide based on menu state */}
+      {isMenuOpen && (
+        <div className="sm:hidden">
+          <div className="px-2 pt-2 pb-3 space-y-1">
+            {navLinks.map((link, index) => (
+              <NavLink
+                key={index}
+                href={link.path}
+                title={link.title}
+                className="block px-3 py-2 rounded-md text-base font-medium"
+              />
+            ))}
+          </div>
+        </div>
+      )}
+    </nav>
+  );
+};
+
+export default Navbar;

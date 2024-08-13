@@ -26,7 +26,7 @@ const TAB_DATA = [
         id: "education",
         content: (
             <ul className="list-disc pl-2">
-                <li>Bachelor of Science (2027) Texas A&M University</li>
+                <li>BS Computer Science - Texas A&M University (Exp. 2027)</li>
             </ul>
         )
     },
