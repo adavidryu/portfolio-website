@@ -26,7 +26,7 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-[#121212] bg-opacity-85 backdrop-blur-sm">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="mx-4 px-4">
         <div className="flex items-center justify-between h-16 sm:h-20">
           <Link href="/" className="flex items-center">
             <div className="relative w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16">
@@ -34,7 +34,6 @@ const Navbar = () => {
                 src="/images/logo.png"
                 alt="Logo"
                 fill
-                className="object-contain"
               />
             </div>
           </Link>

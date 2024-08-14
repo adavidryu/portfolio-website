@@ -14,7 +14,7 @@ const projectsData = [
     {
         id: 2,
         title: "Inventory Management System",
-        description: "Next,js, React, Firebase, GCP",
+        description: "Next.js, React, Firebase, GCP",
         image: "/images/projects/project2.png",
         gitUrl: "https://github.com/adavidryu/inventory-management",
         previewUrl: "https://inventory-management-lyart-xi.vercel.app/",
@@ -23,8 +23,9 @@ const projectsData = [
         id: 3,
         title: "H.AI.R",
         description: "An AI-powered hair type classifier and product recommendation. Built for a hackathon where my team achieved top 20 out of 550+ teams.",
-        image: "/images/about-image.jpeg",
+        image: "/images/projects/project3.png",
         gitUrl: "https://github.com/skandrigi/hshackathon1",
+        previewUrl: "https://www.youtube.com/watch?v=sYmPFrH5e7A",
     },
     // {
     //     id: 4,
