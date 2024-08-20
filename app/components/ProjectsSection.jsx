@@ -7,7 +7,7 @@ const projectsData = [
         title: "AI Customer Service Chatbot",
         description: "Next.js, React, OpenAI, Vercel",
         image: "/images/projects/project1.png",
-        gitUrl: "",
+        gitUrl: "https://github.com/adavidryu/ai-customer-service",
         previewUrl: "http://18.119.129.122/",
         // Add tag ["", ""]
     },
