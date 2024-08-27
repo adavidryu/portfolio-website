@@ -13,7 +13,6 @@ const Footer = () => {
                   src="/images/logo.png"
                   alt="Logo"
                   fill
-                  object-contain
                 />
               </div>
             </a>
