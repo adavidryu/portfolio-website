@@ -4,35 +4,37 @@ import ProjectCard from './ProjectCard'
 const projectsData = [
     {
         id: 1,
+        title: "AI Flashcard SaaS",
+        description: "Next, React, OpenAI, Stripe, Clerk, Firebase",
+        image: "/images/flashycard.png",
+        gitUrl: "https://github.com/adavidryu/ai-flashcards",
+        previewUrl: "https://ai-flashcards-seven.vercel.app/",
+    },
+    {
+        id: 2,
         title: "AI Customer Service Chatbot",
-        description: "Next.js, React, OpenAI, Vercel",
-        image: "/images/projects/project1.png",
+        description: "Next, React, OpenAI, AWS, EC2",
+        image: "/images/projects/chatbot.png",
         gitUrl: "https://github.com/adavidryu/ai-customer-service",
         previewUrl: "http://18.119.129.122/",
         // Add tag ["", ""]
     },
     {
-        id: 2,
-        title: "Inventory Management System",
-        description: "Next.js, React, Firebase, GCP",
-        image: "/images/projects/project2.png",
-        gitUrl: "https://github.com/adavidryu/inventory-management",
-        previewUrl: "https://inventory-management-lyart-xi.vercel.app/",
-    },
-    {
         id: 3,
         title: "H.AI.R",
         description: "An AI-powered hair type classifier and product recommendation. Built for a hackathon where my team achieved top 20 out of 550+ teams.",
-        image: "/images/projects/project3.png",
+        image: "/images/projects/hair.png",
         gitUrl: "https://github.com/skandrigi/hshackathon1",
         previewUrl: "https://www.youtube.com/watch?v=sYmPFrH5e7A",
     },
-    // {
-    //     id: 4,
-    //     title: "AI Flashcard SaaS",
-    //     description: "D",
-    //     image: "/images/about-image.jpeg"
-    // },
+    {
+        id: 4,
+        title: "Inventory Management System",
+        description: "Next, React, Firebase",
+        image: "/images/projects/inventory.png",
+        gitUrl: "https://github.com/adavidryu/inventory-management",
+        previewUrl: "https://inventory-management-lyart-xi.vercel.app/",
+    },
     // {
     //     id: 5,
     //     title: "E",
@@ -42,8 +44,8 @@ const projectsData = [
     {
         id: 6,
         title: "My Modified Infiniti Q50",
-        description: "My pride and joy.",
-        image: "/images/projects/project4.jpg",
+        description: "From power modifications to looks, this is my constantly evolving hands-on project.",
+        image: "/images/projects/car.jpg",
         gitUrl: "",
         previewUrl: "",
     }
