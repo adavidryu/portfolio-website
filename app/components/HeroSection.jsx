@@ -1,10 +1,54 @@
 "use client"
 
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import { TypeAnimation } from 'react-type-animation'
+import axios from 'axios'
 
 const HeroSection = () => {
+  const [downloadStatus, setDownloadStatus] = useState("");
+  const [errorDetails, setErrorDetails] = useState("");
+
+  const downloadResume = async () => {
+    try {
+      setDownloadStatus("Downloading...");
+      setErrorDetails("");
+
+      const response = await axios.get("/api/download", {
+        responseType: "blob",
+      });
+
+      // Check if the response is actually a blob
+      if (!(response.data instanceof Blob)) {
+        throw new Error("Response is not a blob");
+      }
+
+      const contentDisposition = response.headers["content-disposition"];
+      const fileNameMatch = contentDisposition && contentDisposition.match(/filename="(.+)"/);
+      const fileName = fileNameMatch ? fileNameMatch[1] : "resume.pdf";
+
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", fileName);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      setDownloadStatus("Downloaded successfully");
+    } catch (error) {
+      console.error("Error downloading file:", error);
+      setDownloadStatus("Error downloading");
+      if (error.response) {
+        setErrorDetails(`Server error: ${error.response.status} - ${error.response.data}`);
+      } else if (error.request) {
+        setErrorDetails("No response received from server");
+      } else {
+        setErrorDetails(`Error: ${error.message}`);
+      }
+    }
+  };
+
   return (
     <section>
       <div className="grid grid-cols-1 lg:grid-cols-12">
@@ -42,15 +86,16 @@ const HeroSection = () => {
             <button className="px-6 py-3 w-full sm:w-fit rounded-full mr-4 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 hover:bg-slate-200 text-white">
               Hire Me
             </button>
-            <a
-              href="/public/AdamRyu-SWE.pdf"
-              download
+            <button
               className="inline-block px-1 py-1 w-full sm:w-fit rounded-full bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 hover:bg-slate-800 text-white"
+              onClick={downloadResume}
             >
               <span className="block bg-[#121212] hover:bg-slate-800 rounded-full px-5 py-2">
                 Download Resume
               </span>
-            </a>
+            </button>
+            {downloadStatus && <p className="mt-2 text-sm text-white">{downloadStatus}</p>}
+            {errorDetails && <p className="mt-2 text-sm text-red-500">{errorDetails}</p>}
           </div>
         </div>
         <div className="col-span-5 place-self-center mt-4 lg:mt-0">
