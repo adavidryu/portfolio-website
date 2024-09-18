@@ -16,6 +16,7 @@ const TAB_DATA = [
                 <li>C++</li>
                 <li>Node.js</li>
                 <li>Next.js</li>
+                <li>Tailwind</li>
                 <li>Bootstrap</li>
                 <li>Git</li>
             </ul>
