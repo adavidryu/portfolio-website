@@ -4,12 +4,16 @@ import GithubIcon from "/public/images/github-icon.svg";
 import LinkedinIcon from "/public/images/linkedin-icon.svg";
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 const EmailSection = () => {
   const [emailSubmitted, setEmailSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+
     const data = {
       email: e.target.email.value,
       subject: e.target.subject.value,
@@ -18,18 +22,17 @@ const EmailSection = () => {
     const JSONdata = JSON.stringify(data);
     const endpoint = "/api/send";
 
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSONdata,
-    };
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSONdata,
+      });
+      const resData = await response.json();
 
-    const response = await fetch(endpoint, options);
-    const resData = await response.json();
-
-    if (response.status === 200) {
+      if (response.status === 200) {
         console.log("Message sent.");
         setEmailSubmitted(true);
         e.target.reset();
@@ -38,91 +41,154 @@ const EmailSection = () => {
           setEmailSubmitted(false);
         }, 5000);
       }
+    } catch (error) {
+      console.error("Error sending message:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <section
       id="contact"
-      className="grid md:grid-cols-2 my-12 md:my-12 py-24 gap-4 relative"
+      className="py-20 bg-gradient-to-b from-[#121212] to-[#1a1a1a]"
     >
-      <div className="bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary-900 to-transparent rounded-full h-80 w-80 z-0 blur-lg absolute top-3/4 -left-4 transform -translate-x-1/2 -translate-1/2"></div>
-      <div className="z-10">
-        <h5 className="text-xl font-bold text-white my-2">
-          Let&apos;s Connect
-        </h5>
-        <p className="text-[#ADB7BE] mb-4 max-w-md">
-          {" "}
-          I&apos;m currently looking for new opportunities. I love to simply connect so please contact me and I&apos;ll get back to you!
-        </p>
-        <div className="socials flex flex-row gap-2">
-          <Link href="https://github.com/adavidryu">
-            <Image src={GithubIcon} alt="Github Icon" />
-          </Link>
-          <Link href="https://www.linkedin.com/in/adamryu/">
-            <Image src={LinkedinIcon} alt="Linkedin Icon" />
-          </Link>
-        </div>
-      </div>
-      <div>
-        <form className="flex flex-col" onSubmit={handleSubmit}>
-          <div className="mb-6">
-            <label
-              htmlFor="email"
-              className="text-white block mb-2 text-sm font-medium"
-            >
-              Your email
-            </label>
-            <input
-              name="email"
-              type="email"
-              id="email"
-              required
-              className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5"
-              placeholder="someone@gmail.com"
-            />
-          </div>
-          <div className="mb-6">
-            <label
-              htmlFor="subject"
-              className="text-white block text-sm mb-2 font-medium"
-            >
-              Subject
-            </label>
-            <input
-              name="subject"
-              type="text"
-              id="subject"
-              required
-              className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5"
-              placeholder="Just saying hi!"
-            />
-          </div>
-          <div className="mb-6">
-            <label
-              htmlFor="message"
-              className="text-white block text-sm mb-2 font-medium"
-            >
-              Message
-            </label>
-            <textarea
-              name="message"
-              id="message"
-              className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5"
-              placeholder="Let&apos;s talk about..."
-            />
-          </div>
-          <button
-            type="submit"
-            className="bg-purple-500 hover:bg-purple-600 text-white font-medium py-2.5 px-5 rounded-lg w-full"
+      <div className="container mx-auto px-4">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          {/* Left Content */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="space-y-8"
           >
-            Send Message
-          </button>
-          {emailSubmitted && (
-            <p className="text-green-500 text-sm mt-2">
-              Email sent successfully!
-            </p>
-          )}
-        </form>
+            <div>
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                Let&apos;s Connect
+              </h2>
+              <p className="text-gray-400 text-lg max-w-md">
+                I&apos;m currently looking for new opportunities. I love to simply connect 
+                so please contact me and I&apos;ll get back to you!
+              </p>
+            </div>
+
+            {/* Social Links */}
+            <div className="flex gap-6">
+              <Link 
+                href="https://github.com/adavidryu"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group"
+              >
+                <div className="relative w-12 h-12 bg-[#2a2a2a] rounded-xl flex items-center justify-center transition-all duration-300 group-hover:bg-purple-500/20 group-hover:scale-110">
+                  <Image 
+                    src={GithubIcon} 
+                    alt="Github Icon" 
+                    className="w-6 h-6 transition-all duration-300 group-hover:scale-110"
+                  />
+                </div>
+              </Link>
+              <Link 
+                href="https://www.linkedin.com/in/adamryu/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group"
+              >
+                <div className="relative w-12 h-12 bg-[#2a2a2a] rounded-xl flex items-center justify-center transition-all duration-300 group-hover:bg-purple-500/20 group-hover:scale-110">
+                  <Image 
+                    src={LinkedinIcon} 
+                    alt="Linkedin Icon" 
+                    className="w-6 h-6 transition-all duration-300 group-hover:scale-110"
+                  />
+                </div>
+              </Link>
+            </div>
+          </motion.div>
+
+          {/* Contact Form */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="bg-[#2a2a2a] p-8 rounded-2xl border border-purple-500/20"
+          >
+            <form className="space-y-6" onSubmit={handleSubmit}>
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-white mb-2"
+                >
+                  Your email
+                </label>
+                <input
+                  name="email"
+                  type="email"
+                  id="email"
+                  required
+                  className="w-full px-4 py-3 bg-[#1a1a1a] border border-purple-500/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all duration-300"
+                  placeholder="someone@gmail.com"
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="subject"
+                  className="block text-sm font-medium text-white mb-2"
+                >
+                  Subject
+                </label>
+                <input
+                  name="subject"
+                  type="text"
+                  id="subject"
+                  required
+                  className="w-full px-4 py-3 bg-[#1a1a1a] border border-purple-500/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all duration-300"
+                  placeholder="Just saying hi!"
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="message"
+                  className="block text-sm font-medium text-white mb-2"
+                >
+                  Message
+                </label>
+                <textarea
+                  name="message"
+                  id="message"
+                  rows="4"
+                  className="w-full px-4 py-3 bg-[#1a1a1a] border border-purple-500/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all duration-300 resize-none"
+                  placeholder="Let&apos;s talk about..."
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className={`w-full py-3 px-6 rounded-lg text-white font-medium transition-all duration-300 ${
+                  isSubmitting
+                    ? 'bg-purple-500/50 cursor-not-allowed'
+                    : 'bg-gradient-to-r from-purple-500 to-pink-500 hover:opacity-90'
+                }`}
+              >
+                {isSubmitting ? 'Sending...' : 'Send Message'}
+              </button>
+
+              {emailSubmitted && (
+                <motion.p
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-green-400 text-sm text-center"
+                >
+                  Email sent successfully!
+                </motion.p>
+              )}
+            </form>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
